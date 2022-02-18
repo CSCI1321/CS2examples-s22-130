@@ -3,6 +3,20 @@ package cs2.cardgames
 class Deck() {
   private var cards:List[Card] = Nil //List()
 
+  def isEmpty():Boolean = { this.cards == Nil }
+  def add(magicBunnyRabbit:Card):Unit = {
+    this.cards = magicBunnyRabbit :: this.cards
+  }
+  def deal():Card = {
+    val ret = this.cards.head
+    this.cards = this.cards.tail
+    ret
+  }
+  def shuffle():Unit = {
+    this.cards = scala.util.Random.shuffle(this.cards)
+  }
+
+
 }
 
 object Deck {
@@ -15,5 +29,11 @@ object Deck {
     }
     d
   }
+
+  def main(args:Array[String]):Unit = {
+    val stdDeck = Deck()
+    println(stdDeck.cards)
+  }
+
 }
 

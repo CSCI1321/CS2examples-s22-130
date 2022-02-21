@@ -1,21 +1,27 @@
 package cs2.cardgames
 
 class Deck() {
-  private var cards:List[Card] = Nil //List()
+  private var cards:List[Card] = List() //Nil
 
-  def isEmpty():Boolean = { this.cards == Nil }
-  def add(magicBunnyRabbit:Card):Unit = {
-    this.cards = magicBunnyRabbit :: this.cards
-  }
+  def isEmpty():Boolean = { this.cards.length == 0 }
   def deal():Card = {
-    val ret = this.cards.head
-    this.cards = this.cards.tail
-    ret
+    if(cards.length == 0) null
+    else {
+      val ret =this.cards.head
+      this.cards = this.cards.tail
+      ret
+    }
+  }
+  def add(magicBunny:Card):Unit = {
+    this.cards = magicBunny :: this.cards
+  }
+  def combine(other:Deck):Unit = { 
+    cards = cards ::: other.cards
   }
   def shuffle():Unit = {
     this.cards = scala.util.Random.shuffle(this.cards)
   }
-
+  override def toString():String = cards.mkString(", ")
 
 }
 
@@ -29,11 +35,11 @@ object Deck {
     }
     d
   }
+  def empty():Deck = new Deck()
 
   def main(args:Array[String]):Unit = {
-    val stdDeck = Deck()
-    println(stdDeck.cards)
+    val theDeck = Deck()
+    println(theDeck.cards)
   }
 
 }
-

@@ -16,7 +16,7 @@ object ParticleSystemApp extends JFXApp {
       content = canvas
       val g = canvas.graphicsContext2D
 
-      val ps = new ParticleSystem()
+      val ps = new ParticleSystem(Vec2(400,100))
       val timer = AnimationTimer(t => {
         g.setFill(Color.PapayaWhip)
         g.fillRect(0,0, width.value,height.value)
@@ -24,7 +24,7 @@ object ParticleSystemApp extends JFXApp {
         ps.display(g)
         ps.timeStep()
         ps.addParticle()
-        ps.applyForce(Vec2(0,0.005))
+        //ps.applyForce(Vec2(0,0.005))
       })
       timer.start
       

@@ -3,14 +3,20 @@ package cs2.particles
 import scalafx.scene.canvas.GraphicsContext
 import cs2.util.Vec2
 
-class ParticleSystem() {
-  var particles = List[Particle]()
+class ParticleSystem(protected var origin:Vec2) {
+  protected var particles = List[Particle]()
 
   def addParticle():Unit = {
-    particles ::= new SquareParticle(Vec2(400,100), 
+    if(math.random() < 0.5) {
+      particles ::= new RoundParticle(new Vec2(origin.x, origin.y), 
                      Vec2(math.random()-0.5, math.random()-0.5))
+    } else {
+      particles ::= new SquareParticle(origin.clone(), 
+                     Vec2(math.random()-0.5, math.random()-0.5))
+    }
   }
   def display(g:GraphicsContext):Unit = {
+    println(particles.length)
     for(p <- particles) p.display(g)
   }
   def timeStep():Unit = {

@@ -3,11 +3,12 @@ package cs2.particles
 import cs2.util.Vec2
 import scalafx.scene.canvas.GraphicsContext
 
-class Particle(var pos:Vec2, var vel:Vec2) {
+abstract class Particle(protected var pos:Vec2, protected var vel:Vec2) {
 
-  def display(g:GraphicsContext):Unit = {
-    g.fillOval(pos.x,pos.y, 40,40)
-  }
+  //Abstract display method
+  def display(g:GraphicsContext):Unit
+
+  //Concrete methods
   def timeStep():Unit = {
     pos += vel
   }

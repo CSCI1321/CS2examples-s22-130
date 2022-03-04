@@ -2,6 +2,7 @@ package cs2.particles
 
 import scalafx.scene.canvas.GraphicsContext
 import cs2.util.Vec2
+import scalafx.scene.image.Image
 
 class ParticleSystem(protected var origin:Vec2) {
   protected var particles = List[Particle]()
@@ -16,7 +17,7 @@ class ParticleSystem(protected var origin:Vec2) {
     }
   }
   def display(g:GraphicsContext):Unit = {
-    println(particles.length)
+    //println(particles.length)
     for(p <- particles) p.display(g)
   }
   def timeStep():Unit = {

@@ -10,7 +10,7 @@ import scalafx.scene.paint.Color
 import scalafx.scene.input.MouseEvent
 import scalafx.scene.image.Image
 
-object ParticleSystemApp extends JFXApp {
+object ParticleSystemApp extends JFXApp with Rainbowness {
   val img = new Image(getClass().getResource("/images/Star.png").toString)
   
   stage = new JFXApp.PrimaryStage {
@@ -23,11 +23,11 @@ object ParticleSystemApp extends JFXApp {
       var pslist = List[ParticleSystem]() 
       
       canvas.onMouseClicked = (e:MouseEvent) => {
-        pslist ::= new ImageParticleSystem(Vec2(e.x,e.y), img)
+        pslist ::= new ParticleSystem(Vec2(e.x,e.y))
       }
 
       val timer = AnimationTimer(t => {
-        g.setFill(Color.PapayaWhip)
+        g.setFill(stepColor())
         g.fillRect(0,0, width.value,height.value)
         g.setFill(Color.rgb(40,80,120, 0.2))
         for(ps <- pslist) {

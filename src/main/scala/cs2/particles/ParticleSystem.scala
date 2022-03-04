@@ -8,13 +8,16 @@ class ParticleSystem(protected var origin:Vec2) {
   protected var particles = List[Particle]()
 
   def addParticle():Unit = {
+    /*
     if(math.random() < 0.5) {
       particles ::= new RoundParticle(new Vec2(origin.x, origin.y), 
                      Vec2(math.random()-0.5, math.random()-0.5))
     } else {
       particles ::= new SquareParticle(origin.clone(), 
                      Vec2(math.random()-0.5, math.random()-0.5))
-    }
+    }*/
+    particles ::= new RainbowParticle(new Vec2(origin.x, origin.y), 
+                     Vec2(math.random()-0.5, math.random()-0.5))
   }
   def display(g:GraphicsContext):Unit = {
     //println(particles.length)

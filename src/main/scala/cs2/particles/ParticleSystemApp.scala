@@ -11,7 +11,7 @@ import scalafx.scene.input.MouseEvent
 import scalafx.scene.image.Image
 
 object ParticleSystemApp extends JFXApp with Rainbowness {
-  val img = new Image(getClass().getResource("/images/Star.png").toString)
+  val img = new Image(getClass().getResource("/images/Smoke.png").toString)
   
   stage = new JFXApp.PrimaryStage {
     title = "Particles!"
@@ -23,7 +23,13 @@ object ParticleSystemApp extends JFXApp with Rainbowness {
       var pslist = List[ParticleSystem]() 
       
       canvas.onMouseClicked = (e:MouseEvent) => {
-        pslist ::= new ParticleSystem(Vec2(e.x,e.y))
+        pslist ::= new ImageParticleSystem(Vec2(e.x,e.y), img)
+      }
+
+      var wind = Vec2(0.01, 0)
+
+      canvas.onMouseMoved = (e:MouseEvent) => {
+        wind = Vec2(e.x / width.value * 0.02 - 0.01, 0)
       }
 
       val timer = AnimationTimer(t => {
@@ -34,7 +40,8 @@ object ParticleSystemApp extends JFXApp with Rainbowness {
           ps.display(g)
           ps.timeStep()
           ps.addParticle()
-          ps.applyForce(Vec2(0,0.005))
+          ps.applyForce(Vec2(0,-0.003))
+          ps.applyForce(wind)
         }
       })
       timer.start

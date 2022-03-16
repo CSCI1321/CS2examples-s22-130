@@ -6,7 +6,7 @@ import scalafx.scene.image.Image
 class ImageParticleSystem(o:Vec2, val img:Image) extends ParticleSystem(o) {
 
   override def addParticle(): Unit = {
-    particles ::= new ImageParticle(origin.clone(),
+    particles +:= new ImageParticle(origin.clone(),
                       Vec2(math.random()-0.5, math.random()-0.5), img)
   }
 

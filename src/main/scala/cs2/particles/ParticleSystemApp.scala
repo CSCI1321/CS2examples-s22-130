@@ -9,6 +9,7 @@ import scalafx.animation.AnimationTimer
 import scalafx.scene.paint.Color
 import scalafx.scene.input.MouseEvent
 import scalafx.scene.image.Image
+import scala.collection.mutable.Buffer
 
 object ParticleSystemApp extends JFXApp with Rainbowness {
   val img = new Image(getClass().getResource("/images/Smoke.png").toString)
@@ -20,10 +21,15 @@ object ParticleSystemApp extends JFXApp with Rainbowness {
       content = canvas
       val g = canvas.graphicsContext2D
 
-      var pslist = List[ParticleSystem]() 
+      var pslist = List[ParticleSystem]()
+      var erasers = Buffer[Eraser]() 
       
       canvas.onMouseClicked = (e:MouseEvent) => {
-        pslist ::= new ImageParticleSystem(Vec2(e.x,e.y), img)
+        if(e.isAltDown()) {
+          erasers += new Eraser(Vec2(e.x,e.y), 50)
+        } else {
+          pslist ::= new ImageParticleSystem(Vec2(e.x,e.y), img)
+        }
       }
 
       var wind = Vec2(0.01, 0)
@@ -42,6 +48,12 @@ object ParticleSystemApp extends JFXApp with Rainbowness {
           ps.addParticle()
           ps.applyForce(Vec2(0,-0.003))
           ps.applyForce(wind)
+        }
+        for(erase <- erasers) {
+          erase.display(g)
+          for(ps <- pslist) {
+            ps.checkForEraser(erase)
+          }
         }
       })
       timer.start

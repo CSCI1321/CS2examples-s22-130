@@ -37,4 +37,8 @@ class ParticleSystem(protected var origin:Vec2) {
     for(p <- particles) p.applyForce(f)
   }
 
+  def checkForEraser(er:Eraser):Unit = {
+    particles = particles.filterNot(x => er.intersectParticle(x))
+  }
+
 }

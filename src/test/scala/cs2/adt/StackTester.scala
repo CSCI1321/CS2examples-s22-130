@@ -7,7 +7,7 @@ class StackTester {
   var s:Stack[Int] = null
 
   @Before def init():Unit = {
-    s = new ArrayStack[Int]()
+    s = Stack[Int]()
   }
 
   @Test def checkIsEmptyInitially():Unit = {

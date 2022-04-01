@@ -10,6 +10,23 @@ class StackTester {
     s = Stack[Int]()
   }
 
+  @Test def checkEmptyStackException():Unit = {
+    try {
+      s.pop()
+      assertTrue(false)
+    } catch {
+      case ex:java.util.EmptyStackException => { }
+    }
+    try {
+      s.push(1)
+      s.pop()
+    } catch {
+      case ex:java.util.EmptyStackException => {
+        assertTrue(false)
+      }
+    }
+  }
+
   @Test def checkIsEmptyInitially():Unit = {
     assertTrue(s.isEmpty())
   }

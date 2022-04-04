@@ -7,9 +7,11 @@ abstract class Queue[A] {
   def isEmpty():Boolean
 }
 
+class EmptyQueueException extends Exception("Empty Queue")
+
 object Queue {
   def apply[A:Manifest]():Queue[A] = {
-    new ArrayQueue[A]()
+    new LinkedQueue[A]()
   }
 }
 

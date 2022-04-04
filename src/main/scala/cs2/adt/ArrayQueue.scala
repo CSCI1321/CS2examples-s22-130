@@ -26,7 +26,7 @@ class ArrayQueue[A:Manifest] extends Queue[A] {
     len -= 1
     ret
   }
-  class EmptyQueueException extends Exception("Empty Queue")
+  
   def peek():A = { 
     if(isEmpty()) {
       throw new EmptyQueueException()

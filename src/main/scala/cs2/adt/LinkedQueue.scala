@@ -17,7 +17,12 @@ class LinkedQueue[A] extends Queue[A] {
   def dequeue():A = {
     if(isEmpty()) throw new EmptyQueueException()
     val ret = head.data
-    head = head.next
+    if(head == last) {
+      head = null
+      last = null
+    } else {    
+      head = head.next
+    }
     ret
   }
   def peek():A = {

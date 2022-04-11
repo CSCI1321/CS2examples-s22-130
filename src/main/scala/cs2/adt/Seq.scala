@@ -7,6 +7,14 @@ abstract class Seq[A] extends Iterable[A] {
   def remove(idx:Int):Unit
   def length():Int
   def iterator:Iterator[A]
+
+  def prepend(elem:A):Unit = insert(0, elem)
+  def +:= (elem:A):Unit = prepend(elem)
+  def append(elem:A):Unit = insert(length(), elem)
+  def += (elem:A):Unit = append(elem)
+
+  def apply(idx:Int):A = get(idx)
+  def update(idx:Int, elem:A):Unit = set(idx, elem)
 }
 
 object Seq {

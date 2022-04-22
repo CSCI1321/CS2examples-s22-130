@@ -22,6 +22,31 @@ class BinarySearchTree[A <% Ordered[A]] {
         else left.insert(elem)
       }
     }
+    def passUpMax():(Node, A) = {
+      if(right != null) {
+        val (n,v) = right.passUpMax()
+        right = n
+        (this, v)
+      } else {
+        (left, data)
+      }
+    }
+    def remove(elem:A):Node = {
+      if(data >= elem && data <= elem) { //found the node
+        if (right == null) left
+        else if (left == null) right
+        else { //2 kids
+          val (n,v) = left.passUpMax()
+          left = n
+          data = v
+          this
+        }
+      } else { //not at the node yet
+        if(elem > data) right = right.remove(elem)
+        else left = left.remove(elem)
+        this
+      }
+    }
   }
   private var root:Node = null
 

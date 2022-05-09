@@ -33,6 +33,7 @@ object FactorialRuntimes {
   def factCollect(n:BigInt):BigInt = {
     (BigInt(1) to n).reduce(_*_)
   }
+
   /*
   def factParCollect(n:BigInt):BigInt = {
     (BigInt(1) to n).par.reduce(_*_)
@@ -54,25 +55,25 @@ object FactorialRuntimes {
   }
 
   def main(args:Array[String]):Unit = {
-    val num = 100
+    val num = 10
     val logger = new TimeLogger
 
     logger.reset()
     logger.logTime()
-    /*
+
     logger.reset()
     factRecur(num)
     logger.logTime()
-    */
+    
     logger.reset()
-    factFor(num)
+    println(factFor(num))
     logger.logTime()
     
     logger.reset()
     factCollect(num)
     logger.logTime()
+    
     /*
-
     logger.reset()
     println(factParFor(num))
     logger.logTime()
@@ -81,11 +82,12 @@ object FactorialRuntimes {
     println(factParCollect(num))
     logger.logTime()
     */
+    /*
     for(i <- 2 to 60 by 2) {
       println(i)
       logger.reset()
       factExecutor(num, i)
       logger.logTime()
-    }
+    }*/
   }
 }
